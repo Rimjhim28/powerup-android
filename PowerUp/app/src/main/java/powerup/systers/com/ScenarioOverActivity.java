@@ -71,6 +71,8 @@ public class ScenarioOverActivity extends AppCompatActivity {
         Scenario prevScene = getmDbHandler().getScenarioFromID(SessionHistory.prevSessionID); //Fetching Scenario
         scenarioActivityDone = 1;
         if(!new ScenarioOverActivity(this).isActivityOpened()){
+            //If not launched from map then only dialogMaker() is called
+            if (!(getIntent().getExtras()!=null && PowerUpUtils.MAP.equals(getIntent().getExtras().getString(PowerUpUtils.SOURCE))))
             dialogMaker();
         }
         ImageView replayButton = (ImageView) findViewById(R.id.replayButton);
