@@ -44,6 +44,8 @@ import powerup.systers.com.vocab_match_game.VocabMatchGameActivity;
 import powerup.systers.com.vocab_match_game.VocabMatchSessionManager;
 import powerup.systers.com.vocab_match_game.VocabMatchTutorials;
 
+import static java.lang.Boolean.TRUE;
+
 @SuppressLint("NewApi")
 public class GameActivity extends Activity {
 
@@ -336,6 +338,8 @@ public class GameActivity extends Activity {
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
+                goToMap.setAlpha(1f);
+                goToMap.setClickable(TRUE);
                 dialog.dismiss();
             }
         });
