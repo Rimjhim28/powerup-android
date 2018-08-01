@@ -320,11 +320,19 @@ public class GameActivity extends Activity {
      */
     @Override
     public void onBackPressed(){
-        // The flag FLAG_ACTIVITY_CLEAR_TOP checks if an instance of the activity is present and it
-        // clears the activities that were created after the found instance of the required activity
-        startActivity(new Intent(GameActivity.this, MapActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-        finish();
+        if(SessionHistory.currScenePoints != 0) {
+            gotToMapDialogue();
+            SessionHistory.totalPoints -= SessionHistory.currScenePoints;
+            getmDbHandler()
+                    .setReplayedScenario(scene.getScenarioName());
+        } else {
+            // The flag FLAG_ACTIVITY_CLEAR_TOP checks if an instance of the activity is present and it
+            // clears the activities that were created after the found instance of the required activity
+            startActivity(new Intent(GameActivity.this, MapActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+            finish();
+        }
     }
+
     public void gotToMapDialogue(){
         AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
         builder.setTitle(context.getResources().getString(R.string.start_title_message))
